@@ -10,7 +10,7 @@ ARG HIBISCUS_VERSION \
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt update \
-    && apt install -qqy --no-install-recommends zip unzip wget
+    && apt install -qqy --no-install-recommends zip unzip wget ca-certificates
 
 RUN wget https://www.willuhn.de/products/hibiscus-server/releases/hibiscus-server-${HIBISCUS_VERSION}.zip -O $HIBISCUS_DOWNLOAD_PATH \
     && echo $HIBISCUS_SERVER_PATH \
