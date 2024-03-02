@@ -27,6 +27,6 @@ jobs:
       - name: Autocommit latest release version
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
           commit_message: "Release version ${{ env.version }}"
           tagging_message: 'v${{ env.version }}'
