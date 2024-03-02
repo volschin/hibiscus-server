@@ -12,8 +12,8 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt update \
     && apt install -qqy --no-install-recommends zip unzip wget ca-certificates
 
-RUN wget https://www.willuhn.de/products/hibiscus-server/releases/hibiscus-server-${HIBISCUS_VERSION}.zip -O $HIBISCUS_DOWNLOAD_PATH \
-    && echo $HIBISCUS_SERVER_PATH \
+ADD https://www.willuhn.de/products/hibiscus-server/releases/hibiscus-server-${HIBISCUS_VERSION}.zip $HIBISCUS_DOWNLOAD_PATH
+RUN echo $HIBISCUS_SERVER_PATH \
     && mkdir -p $HIBISCUS_SERVER_PATH \
     && unzip $HIBISCUS_DOWNLOAD_PATH -d $HIBISCUS_SERVER_PATH \
     && mv ${HIBISCUS_SERVER_PATH}/hibiscus-server/* $HIBISCUS_SERVER_PATH \
@@ -21,7 +21,6 @@ RUN wget https://www.willuhn.de/products/hibiscus-server/releases/hibiscus-serve
 
 FROM eclipse-temurin:11 as hibiscus-server
 ARG HIBISCUS_VERSION \
-    HIBISCUS_DOWNLOAD_PATH \
     HIBISCUS_SERVER_PATH
 
 ENV HIBISCUS_PASSWORD=password
