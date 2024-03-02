@@ -1,5 +1,5 @@
 {
-  "name": "hibiscus-server-docker",
+  "name": "hibiscus-server",
   "version": "1.0.0",
   "description": "scripts around building hibiscus-server docker image",
   "main": "get-version-from-changelog.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IARI/hibiscus-server-docker.git"
+    "url": "git+https://github.com/volschin/hibiscus-server.git"
   },
   "author": "Julian Jarecki",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/IARI/hibiscus-server-docker/issues"
+    "url": "https://github.com/volschin/hibiscus-server-docker/issues"
   },
-  "homepage": "https://github.com/IARI/hibiscus-server-docker#readme",
+  "homepage": "https://github.com/volschin/hibiscus-server-docker#readme",
   "dependencies": {
     "@xmldom/xmldom": "^0.7.5",
     "xpath": "^0.0.34"
