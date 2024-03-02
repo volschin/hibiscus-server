@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/volschin/hibiscus-server-docker#readme",
   "dependencies": {
-    "@xmldom/xmldom": "^0.7.5",
+    "@xmldom/xmldom": "^0.8.0",
     "xpath": "^0.0.34"
   }
 }
