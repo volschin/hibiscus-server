@@ -20,6 +20,6 @@
   "homepage": "https://github.com/IARI/hibiscus-server-docker#readme",
   "dependencies": {
     "@xmldom/xmldom": "^0.7.5",
-    "xpath": "^0.0.32"
+    "xpath": "^0.0.34"
   }
 }
