@@ -21,7 +21,7 @@ RUN wget https://www.willuhn.de/products/hibiscus-server/releases/hibiscus-serve
 #    && chmod -R 775 $HIBISCUS_SERVER_PATH
 
 
-FROM eclipse-temurin:11 as hibiscus-server
+FROM eclipse-temurin:21 as hibiscus-server
 ARG HIBISCUS_VERSION \
     HIBISCUS_DOWNLOAD_PATH \
     HIBISCUS_SERVER_PATH
