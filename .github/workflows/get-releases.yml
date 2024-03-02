@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.head_ref }}
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
       - name: Use Node.js
@@ -23,13 +24,13 @@ jobs:
       - name: Store Version number in env
         run: |
           echo "version=$(cat release-version)" >> $GITHUB_ENV
-      - name: Check for modified files
-        id: git-check
-        run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
-      - name: Commit latest release version
-        if: steps.git-check.outputs.modified == 'true'
-        uses: actions-js/push@v1.4
+#      - name: Check for modified files
+#        id: git-check
+#        run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+      - name: Autocommit latest release version
+#        if: steps.git-check.outputs.modified == 'true'
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          message: "Release version ${{ env.version }}"
-          tags: v${{ env.version }}
+          commit_message: "Release version ${{ env.version }}"
+          tagging_message: 'v${{ env.version }}'
