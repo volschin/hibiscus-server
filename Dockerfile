@@ -1,9 +1,8 @@
 ARG HIBISCUS_VERSION=2.10.17 \
     HIBISCUS_DOWNLOAD_PATH=/opt/hibiscus-server.zip \
-    HIBISCUS_SERVER_PATH=/opt/hibiscus-server \
-    OPENJDK_VERSION=20-slim
+    HIBISCUS_SERVER_PATH=/opt \
 
-FROM ubuntu
+FROM ubuntu:lts
 ARG HIBISCUS_VERSION \
     HIBISCUS_DOWNLOAD_PATH \
     HIBISCUS_SERVER_PATH
@@ -13,19 +12,15 @@ RUN apt update \
     && apt install -qqy --no-install-recommends zip unzip wget ca-certificates
 
 ADD https://www.willuhn.de/products/hibiscus-server/releases/hibiscus-server-${HIBISCUS_VERSION}.zip $HIBISCUS_DOWNLOAD_PATH
-RUN echo $HIBISCUS_SERVER_PATH \
-    && mkdir -p $HIBISCUS_SERVER_PATH \
-    && unzip $HIBISCUS_DOWNLOAD_PATH -d $HIBISCUS_SERVER_PATH \
-    && mv ${HIBISCUS_SERVER_PATH}/hibiscus-server/* $HIBISCUS_SERVER_PATH \
-    && rm -rf ${HIBISCUS_SERVER_PATH}/hibiscus-server
+RUN unzip $HIBISCUS_DOWNLOAD_PATH -d $HIBISCUS_SERVER_PATH \
+    && rm ${HIBISCUS_DOWNLOAD_PATH}
 
 FROM eclipse-temurin:11 as hibiscus-server
 ARG HIBISCUS_VERSION \
     HIBISCUS_SERVER_PATH
-
 ENV HIBISCUS_PASSWORD=password
 
-RUN mkdir -p $HIBISCUS_SERVER_PATH
+#RUN mkdir -p $HIBISCUS_SERVER_PATH
 COPY --chmod=775 --from=0 $HIBISCUS_SERVER_PATH $HIBISCUS_SERVER_PATH
 WORKDIR $HIBISCUS_SERVER_PATH
 
