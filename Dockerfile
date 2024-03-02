@@ -1,4 +1,4 @@
-ARG HIBISCUS_VERSION=2.10.9 \
+ARG HIBISCUS_VERSION=2.10.17 \
     HIBISCUS_DOWNLOAD_PATH=/opt/hibiscus-server.zip \
     HIBISCUS_SERVER_PATH=/opt/hibiscus-server \
     OPENJDK_VERSION=20-slim
@@ -21,7 +21,7 @@ RUN wget https://www.willuhn.de/products/hibiscus-server/releases/hibiscus-serve
 #    && chmod -R 775 $HIBISCUS_SERVER_PATH
 
 
-FROM openjdk:$OPENJDK_VERSION as hibiscus-server
+FROM eclipse-temurin:11 as hibiscus-server
 ARG HIBISCUS_VERSION \
     HIBISCUS_DOWNLOAD_PATH \
     HIBISCUS_SERVER_PATH
