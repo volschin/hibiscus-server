@@ -1,10 +1,10 @@
-version: '3.8'
+version: '3.9'
 
 services:
   hibiscus-server:
     container_name: hibiscus-server
     restart: always
-    image: iari/hibiscus-server:2.10.9
+    image: ghcr.io/volschin/hibiscus-server:2.10.17
     volumes:
       - hibiscus_cfg:/opt/hibiscus-server/cfg
       - jameica_data:/root/.jameica
@@ -18,9 +18,9 @@ services:
       - "traefik.http.routers.hibiscus.rule=Host(`hibiscus.myfancydomain.finance`)"
       - "traefik.http.services.hibiscus.loadbalancer.server.port=8080"
 
-  hibiscus-mariadb:
-    container_name: "hibiscus-mariadb"
-    image: "mariadb:latest"
+  hibiscus-db:
+    container_name: "hibiscus-db"
+    image: mariadb:10
     command:
       - "--character-set-server=utf8mb4"
       - "--collation-server=utf8mb4_unicode_ci"
