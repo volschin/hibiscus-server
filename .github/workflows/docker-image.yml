@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'release-version'
+      - 'Dockerfile'
+      - 'package.json'
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
