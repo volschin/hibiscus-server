@@ -3,15 +3,15 @@ version: '3.9'
 services:
   hibiscus-server:
     container_name: hibiscus-server
-    restart: always
-    image: ghcr.io/volschin/hibiscus-server:2.10.17
+    restart: unless-stopped
+    image: ghcr.io/volschin/hibiscus-server:2.10
     volumes:
       - hibiscus_cfg:/opt/hibiscus-server/cfg
       - jameica_data:/root/.jameica
     networks:
       proxy:
     environment:
-      HIBISCUS_PASSWORD: mySecretPassword
+      HIBISCUS_PASSWORD: ${HIBISCUS_PASSWORD}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.hibiscus.entrypoints=https"
@@ -24,11 +24,11 @@ services:
     command:
       - "--character-set-server=utf8mb4"
       - "--collation-server=utf8mb4_unicode_ci"
-    restart: always
+    restart: unless-stopped
     volumes:
       - "hibiscus-db:/var/lib/mysql"
     environment:
-      - "MYSQL_ROOT_PASSWORD=mySecretRootPw"
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-mySecretRootPw}"
       - "MYSQL_DATABASE=hibiscus"
       - "MYSQL_USER=hibiscus"
       - "MYSQL_PASSWORD=hibiscus"
@@ -40,8 +40,6 @@ services:
       - "traefik.tcp.routers.hibiscusdb.rule=HostSNI(`*`)"
       - "traefik.tcp.routers.hibiscusdb.service=hibiscusdb"
       - "traefik.tcp.services.hibiscusdb.loadbalancer.server.port=3306"
-
-
 
 volumes:
   hibiscus-db:
