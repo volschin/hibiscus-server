@@ -40,6 +40,13 @@ services:
       - "traefik.tcp.routers.hibiscusdb.rule=HostSNI(`*`)"
       - "traefik.tcp.routers.hibiscusdb.service=hibiscusdb"
       - "traefik.tcp.services.hibiscusdb.loadbalancer.server.port=3306"
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      start_period: 1m
+      start_interval: 10s
+      interval: 1m
+      timeout: 5s
+      retries: 3
 
 volumes:
   hibiscus-db:
