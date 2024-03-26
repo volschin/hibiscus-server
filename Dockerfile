@@ -17,7 +17,8 @@ ADD https://www.willuhn.de/products/hibiscus-server/releases/hibiscus-server-${H
 RUN unzip $HIBISCUS_DOWNLOAD_PATH -d $HIBISCUS_INSTALL_PATH \
     && rm ${HIBISCUS_DOWNLOAD_PATH}
 
-FROM eclipse-temurin:11 as hibiscus-server
+#FROM eclipse-temurin:11 as hibiscus-server
+FROM gcr.io/distroless/java17-debian12 as hibiscus-server
 ARG HIBISCUS_VERSION \
     HIBISCUS_SERVER_PATH
 ENV HIBISCUS_PASSWORD=password
