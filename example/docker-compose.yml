@@ -8,10 +8,9 @@ services:
     volumes:
       - hibiscus_cfg:/opt/hibiscus-server/cfg
       - jameica_data:/root/.jameica
+      - ./hibiscus_password.txt:/run/secrets/hibiscus-pwd
     networks:
       proxy:
-    environment:
-      HIBISCUS_PASSWORD: ${HIBISCUS_PASSWORD}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.hibiscus.entrypoints=https"
