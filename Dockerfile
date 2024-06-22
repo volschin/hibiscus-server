@@ -21,7 +21,6 @@ RUN unzip $HIBISCUS_DOWNLOAD_PATH -d $HIBISCUS_INSTALL_PATH \
 FROM gcr.io/distroless/java17-debian12 as hibiscus-server
 ARG HIBISCUS_VERSION \
     HIBISCUS_SERVER_PATH
-ENV HIBISCUS_PASSWORD=password
 
 COPY --chmod=775 --from=0 $HIBISCUS_SERVER_PATH $HIBISCUS_SERVER_PATH
 WORKDIR $HIBISCUS_SERVER_PATH
@@ -29,4 +28,4 @@ WORKDIR $HIBISCUS_SERVER_PATH
 #/cfg/de.willuhn.jameica.hbci.rmi.HBCIDBService.properties
 #/cfg/de.willuhn.jameica.webadmin.Plugin.properties
 
-CMD ["./jameicaserver.sh", "-p ${HIBISCUS_PASSWORD}"]
+CMD ["./jameicaserver.sh", "-w /run/secrets/hibiscus-pwd"]
