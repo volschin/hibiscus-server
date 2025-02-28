@@ -18,7 +18,7 @@ RUN unzip $HIBISCUS_DOWNLOAD_PATH -d $HIBISCUS_INSTALL_PATH \
     && rm ${HIBISCUS_DOWNLOAD_PATH}
 
 #FROM eclipse-temurin:11 as hibiscus-server
-FROM gcr.io/distroless/java21-debian12 as hibiscus-server
+FROM gcr.io/distroless/java21-debian12:nonroot as hibiscus-server
 ARG HIBISCUS_VERSION \
     HIBISCUS_SERVER_PATH
 
@@ -28,4 +28,4 @@ WORKDIR $HIBISCUS_SERVER_PATH
 #/cfg/de.willuhn.jameica.hbci.rmi.HBCIDBService.properties
 #/cfg/de.willuhn.jameica.webadmin.Plugin.properties
 
-CMD ["./jameicaserver.sh", "-w /run/secrets/hibiscus-pwd"]
+CMD ["jameica-linux.jar", "-w /run/secrets/hibiscus-pwd"]
