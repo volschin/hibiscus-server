@@ -1,4 +1,4 @@
-ARG HIBISCUS_VERSION=2.10.17 \
+ARG HIBISCUS_VERSION=2.10.24 \
     HIBISCUS_DOWNLOAD_PATH=/opt/hibiscus-server.zip \
     HIBISCUS_INSTALL_PATH=/opt \
     HIBISCUS_SERVER_PATH=/opt/hibiscus-server
@@ -18,7 +18,7 @@ RUN unzip $HIBISCUS_DOWNLOAD_PATH -d $HIBISCUS_INSTALL_PATH \
     && rm ${HIBISCUS_DOWNLOAD_PATH}
 
 #FROM eclipse-temurin:11 as hibiscus-server
-FROM gcr.io/distroless/java17-debian12 as hibiscus-server
+FROM gcr.io/distroless/java21-debian12 as hibiscus-server
 ARG HIBISCUS_VERSION \
     HIBISCUS_SERVER_PATH
 
