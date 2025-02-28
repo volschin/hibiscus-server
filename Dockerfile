@@ -16,8 +16,8 @@ RUN apt update \
 ADD https://www.willuhn.de/products/hibiscus-server/releases/hibiscus-server-${HIBISCUS_VERSION}.zip $HIBISCUS_DOWNLOAD_PATH
 RUN unzip $HIBISCUS_DOWNLOAD_PATH -d $HIBISCUS_INSTALL_PATH \
     && rm ${HIBISCUS_DOWNLOAD_PATH}
+ADD https://dlm.mariadb.com/4174416/Connectors/java/connector-java-3.5.2/mariadb-java-client-3.5.2.jar ${HIBISCUS_SERVER_PATH}/lib
 
-#FROM eclipse-temurin:11 as hibiscus-server
 FROM gcr.io/distroless/java21-debian12:nonroot as hibiscus-server
 ARG HIBISCUS_VERSION \
     HIBISCUS_SERVER_PATH
