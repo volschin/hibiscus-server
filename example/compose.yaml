@@ -1,10 +1,12 @@
-version: '3.9'
-
 services:
   hibiscus-server:
     container_name: hibiscus-server
     restart: unless-stopped
     image: ghcr.io/volschin/hibiscus-server:2.10
+    depends_on:
+      hibiscus-db:
+        condition: service_healthy
+        restart: true
     volumes:
       - hibiscus_cfg:/opt/hibiscus-server/cfg
       - jameica_data:/root/.jameica
