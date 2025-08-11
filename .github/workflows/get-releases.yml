@@ -14,7 +14,7 @@ jobs:
       contents: write
       
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ github.head_ref }}
 #          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
@@ -31,7 +31,7 @@ jobs:
         run: |
           echo "version=$(cat release-version)" >> $GITHUB_ENV
       - name: Autocommit latest release version
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
 #          github_token: ${{ secrets.GITHUB_TOKEN }}
           commit_message: Release version ${{ env.version }}
