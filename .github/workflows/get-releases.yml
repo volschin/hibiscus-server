@@ -14,13 +14,13 @@ jobs:
       contents: write
       
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: ${{ github.head_ref }}
 #          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '20.11'
       - name: Install dependencies
@@ -31,7 +31,7 @@ jobs:
         run: |
           echo "version=$(cat release-version)" >> $GITHUB_ENV
       - name: Autocommit latest release version
-        uses: stefanzweifel/git-auto-commit-action@v6
+        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0 # v6
         with:
 #          github_token: ${{ secrets.GITHUB_TOKEN }}
           commit_message: Release version ${{ env.version }}
