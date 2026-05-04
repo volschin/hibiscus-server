@@ -21,7 +21,7 @@ services:
 
   hibiscus-db:
     container_name: "hibiscus-db"
-    image: mariadb:11
+    image: mariadb:12
     command:
       - "--character-set-server=utf8mb4"
       - "--collation-server=utf8mb4_unicode_ci"
