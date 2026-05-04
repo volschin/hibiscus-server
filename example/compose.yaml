@@ -2,7 +2,7 @@ services:
   hibiscus-server:
     container_name: hibiscus-server
     restart: unless-stopped
-    image: ghcr.io/volschin/hibiscus-server:2.10
+    image: ghcr.io/volschin/hibiscus-server:2.12
     depends_on:
       hibiscus-db:
         condition: service_healthy
