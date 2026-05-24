@@ -1,6 +1,6 @@
 {
   "name": "hibiscus-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "scripts around building hibiscus-server docker image",
   "main": "get-version-from-changelog.js",
   "type": "module",
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/volschin/hibiscus-server-docker#readme",
   "dependencies": {
-    "@xmldom/xmldom": "^0.8.0",
+    "@xmldom/xmldom": "^0.8.13",
     "xpath": "^0.0.34"
   }
 }
