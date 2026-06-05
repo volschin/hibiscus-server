@@ -27,10 +27,10 @@ There is no test suite — `npm test` is a placeholder that exits 1.
 The version lifecycle is driven entirely by GitHub Actions; understanding the chain matters before touching any workflow:
 
 1. **`.github/workflows/get-releases.yml`** (daily cron `0 11 * * *`): runs `npm run get-version`, which writes the scraped version into the `release-version` file, then auto-commits it as `Release version X.Y.Z` **and creates git tag `vX.Y.Z`**.
-2. **`.github/workflows/docker-image.yml`** triggers on **tag `v**`** (and on `Dockerfile` changes / PRs). It reads `release-version`, builds with `HIBISCUS_VERSION` build-arg, pushes multi-tag to GHCR (`docker/metadata-action` → semver + sha tags), and **signs each image with Cosign** via GitHub OIDC.
+2. **`.github/workflows/docker-image.yml`** triggers on pushes/PRs to `main` (with `paths-ignore: ['.github/**', '**.md']`), on tag `v**`, and `workflow_dispatch`. It reads `release-version`, builds with `HIBISCUS_VERSION` build-arg, pushes multi-tag to GHCR (`docker/metadata-action` → semver + sha tags), and **signs each image with Cosign** via GitHub OIDC.
 3. **`.github/workflows/trivy.yml`** (weekly cron): scans the published `:main` image for CRITICAL/HIGH CVEs, uploads SARIF to the Security tab.
 
-Gotcha: the `release-version` path trigger in `docker-image.yml` is **commented out**, so a bare commit to `release-version` does *not* rebuild the image — only the `vX.Y.Z` tag that `get-releases.yml` pushes alongside it does. If you bump the version by hand, push a matching `v` tag or the image won't build.
+Gotcha: the daily auto-release tag from `get-releases.yml` does **not** trigger `docker-image.yml`. `git-auto-commit-action` pushes the tag with the default `GITHUB_TOKEN`, and GitHub's recursion guard suppresses workflow runs for refs pushed by `GITHUB_TOKEN`. So image builds for a new version are kicked off **manually** via `workflow_dispatch` on the `vX.Y.Z` tag (confirmed in run history: the `v2.12.x` builds are `workflow_dispatch` events). To make auto-tags build automatically you'd need a PAT in `get-releases.yml`'s checkout step.
 
 ## Key details
 
