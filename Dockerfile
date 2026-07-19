@@ -28,4 +28,4 @@ WORKDIR $HIBISCUS_SERVER_PATH
 #/cfg/de.willuhn.jameica.hbci.rmi.HBCIDBService.properties
 #/cfg/de.willuhn.jameica.webadmin.Plugin.properties
 
-CMD ["jameica-linux.jar", "-w /run/secrets/hibiscus-pwd"]
+CMD ["jameica-linux64.jar", "-w /run/secrets/hibiscus-pwd"]
